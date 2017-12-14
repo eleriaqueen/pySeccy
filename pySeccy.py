@@ -1,8 +1,8 @@
-C_DESC = "Player-character name can only be 12 characters long and must contain ASCII characters in Classic mode"
-BB_DESC = "Player-character name can only be 10 characters long but can contain unicode characters in Blue-Burst mode"
+C_DESC = "Classic mode:"
+BB_DESC = "Blue-Burst mode:"
 NOTASCII = "[!] Name contains non-ASCII characters"
-LEN_REMINDER = "[!] Player-character name can only be 12 characters long in Classic mode, input a shorter one: "
-BB_LEN_REMINDER = "[!] Player-character name can only be 10 characters long in BB mode, input a shorter one: "
+LEN_REMINDER = "[!] Name can only be 12 characters long in Classic mode, input a shorter one: "
+BB_LEN_REMINDER = "[!] Name can only be 10 characters long in BB mode, input a shorter one: "
 TYPE_IN_NAME = "Type in a character name: "
 MODE_SELECT = "(C)lassic or (B)lue-Burst calculation ? "
 
