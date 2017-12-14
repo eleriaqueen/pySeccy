@@ -8,7 +8,7 @@ MODE_SELECT = "(C)lassic or (B)lue-Burst calculation ? "
 
 PSOBB_CLASSES = ['HUmar', 'HUnewearl', 'HUcast', 'HUcaseal', 'RAmar', 'RAmarl', 'RAcast', 'RAcaseal', 'FOmar', 'FOmarl', 'FOnewm', 'FOnewearl']
 PSOBB_CLASSESVAL = [0, 1, 2, 9, 3, 1, 4, 5, 0, 6, 7, 8]
-PSO_LEGACY_CLASSVAL = 5 # Calculations for PSO games older than BB assume class is a Racaseal
+PSO_LEGACY_CLASSVAL = 5 # Pre-BB
 PSO_SECTIONID = ['Pinkal', 'Redria', 'Oran', 'Yellowboze', 'Whitill', 'Viridia', 'Greenill', 'Skyly', 'Bluefull', 'Purplenum']
 
 def unicode_sum ( input_str ):
@@ -18,15 +18,17 @@ def unicode_sum ( input_str ):
 	while 1:
 		if i >= (len(input_str)):
 			break
-		sum += ord(input_str[i])
-		if ((ord(input_str[i]) >= 0x100) and (ord(input_str[i]) < 0xFF61)):
+		
+		cur = ord(input_str[i])
+		sum += cur
+		if ((cur >= 0x100) and (cur < 0xFF61)):
 
 			if (flag != 2):
 
 				flag = 2
 				sum = sum + 0x53
 				
-		elif (ord(input_str[i]) < 0xFF91):
+		elif (cur < 0xFF91):
 	
 			if (flag != 1):
 				flag = 1
@@ -37,9 +39,9 @@ def unicode_sum ( input_str ):
 
 def isascii ( input_str ):
 		if len(input_str) != (len(input_str.encode())):
-			return 0
+			return False
 		else:
-			return 1
+			return True
 
 modechar = input(str(MODE_SELECT))
 if ((modechar == 'c') or (modechar == "C")): # Classic calculation mode
