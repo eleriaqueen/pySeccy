@@ -1,8 +1,8 @@
 C_DESC = "Classic mode:"
 BB_DESC = "Blue-Burst mode:"
 NOTASCII = "[!] Name contains non-ASCII characters"
-LEN_REMINDER = "[!] Name can only be 12 characters long in Classic mode, input a shorter one: "
-BB_LEN_REMINDER = "[!] Name can only be 10 characters long in BB mode, input a shorter one: "
+LEN_REMINDER = "[!] Name must be 12 characters long in Classic mode"
+BB_LEN_REMINDER = "[!] Name must be 10 characters long in BB mode"
 TYPE_IN_NAME = "Type in a character name: "
 MODE_SELECT = "(C)lassic or (B)lue-Burst calculation ? "
 
@@ -12,20 +12,34 @@ PSO_LEGACY_CLASSVAL = 5 # Calculations for PSO games older than BB assume class 
 PSO_SECTIONID = ['Pinkal', 'Redria', 'Oran', 'Yellowboze', 'Whitill', 'Viridia', 'Greenill', 'Skyly', 'Bluefull', 'Purplenum']
 
 def unicode_sum ( input_str ):
-        i = 0
-        total = 0
-        while 1:
-            if i >= (len(input_str)):
-               break
-            total += ord(input_str[i])
-            i += 1
-        return total
+	i = 0
+	sum = 0
+	flag = 0
+	while 1:
+		if i >= (len(input_str)):
+			break
+		sum += ord(input_str[i])
+		if ((ord(input_str[i]) >= 0x100) and (ord(input_str[i]) < 0xFF61)):
+
+			if (flag != 2):
+
+				flag = 2
+				sum = sum + 0x53
+				
+		elif (ord(input_str[i]) < 0xFF91):
+	
+			if (flag != 1):
+				flag = 1
+				sum = sum + 0x2D
+
+		i += 1
+	return sum
 
 def isascii ( input_str ):
-    if len(input_str) != (len(input_str.encode())):
-        return 0
-    else:
-        return 1
+		if len(input_str) != (len(input_str.encode())):
+			return 0
+		else:
+			return 1
 
 modechar = input(str(MODE_SELECT))
 if ((modechar == 'c') or (modechar == "C")): # Classic calculation mode
