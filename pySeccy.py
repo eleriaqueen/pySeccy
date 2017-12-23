@@ -1,81 +1,131 @@
-C_DESC = "Classic mode:"
-BB_DESC = "Blue-Burst mode:"
-NOTASCII = "[!] Name contains non-ASCII characters"
-LEN_REMINDER = "[!] Name must be 12 characters long in Classic mode"
-BB_LEN_REMINDER = "[!] Name must be 10 characters long in BB mode"
-TYPE_IN_NAME = "Type in a character name: "
-MODE_SELECT = "(C)lassic or (B)lue-Burst calculation ? "
+import sys
 
-PSOBB_CLASSES = ['HUmar', 'HUnewearl', 'HUcast', 'HUcaseal', 'RAmar', 'RAmarl', 'RAcast', 'RAcaseal', 'FOmar', 'FOmarl', 'FOnewm', 'FOnewearl']
-PSOBB_CLASSESVAL = [0, 1, 2, 9, 3, 11, 4, 5, 10, 6, 7, 8]
-PSO_LEGACY_CLASSVAL = 5 # Pre-BB
-PSO_SECTIONID = ["Viridia", "Greenill", "Skyly", "Bluefull", "Purplenum", "Pinkal", "Redria", "Oran", "Yellowboze", "Whitill"]
+USAGE = "usage: hildebear name\n\
+       hildebear [-h] [-f NAME] [-F NAME] [-l]\n\n\
+optional arguments:\n\
+  -h, --help            show this help message and exit\n\
+  -fc, --force-classic NAME  compute Section ID\n\
+                        for PSO V1\\V2\\PC\\GC only\n\
+  -fb, --force-bb NAME  compute Section ID\n\
+                        for PSO Blue Burst only\n\
+  -l, --loop            enter multiple names one after the other\n\
+                        type-in the word 'exit' to leave\n"
 
-def unicode_sum ( input_str, cval ):
-	sum = 0
-	flag = 0
-	for i in input_str:
+def SectionID(name):
+	idList = ['Pinkal', 'Redria', 'Oran', 'Yellowboze', 'Whitill', 'Viridia', 'Greenill', 'Skyly', 'Bluefull', 'Purplenum']
+	classicVal = 5
+	total = 0
+	
+	for i in name:
+		total += ord(i)
 		
-		sum += ord(i)
+	return(idList[(total + classicVal) % 10] )
+	
+def BB_SectionID(name, BBVal):
+	idList = ["Viridia", "Greenill", "Skyly", "Bluefull", "Purplenum", "Pinkal", "Redria", "Oran", "Yellowboze", "Whitill"]
+	total = 0
+	flag = 0
+	
+	for i in name:
+		total += ord(i)
 		cur = ord(i)
+		
 		if (cur > 256) and (cur < 65377):
 
 			if (flag != 2):
 
 				flag = 2
-				sum = sum + 83
+				total += 83
 				
 		elif (cur < 0xFF91):
 
 			if (flag != 1):
 
 				flag = 1
-				sum = sum + 0x2D
+				total += 0x2D
 				
-	return ((sum + cval) % 10)
+	return(idList[(total + BBVal) % 10] )
 
-def isascii ( input_str ):
-		if len(input_str) != (len(input_str.encode())):
-			return False
-		else:
-			return True
+def PrntSecID(name):
+	print(SectionID(name), lega)
+	
+def BB_PrntSecIDList(name):
+	BB_CLASSVAL = [0, 1, 2, 9, 3, 11, 4, 5, 10, 6, 7, 8]
+	print("  HUmar     = " + BB_SectionID(name, BB_CLASSVAL[0]))
+	print("  HUcast    = " + BB_SectionID(name, BB_CLASSVAL[1]))
+	print("  HUcaseal  = " + BB_SectionID(name, BB_CLASSVAL[2]))
+	print("  HUnewearl = " + BB_SectionID(name, BB_CLASSVAL[3]))
 			
-modechar = input(str(MODE_SELECT))
-if ((modechar == 'c') or (modechar == "C")): # Classic calculation mode
-    print(C_DESC)
-    while (1):
-        charname = input(str(TYPE_IN_NAME))
-        if (isascii(charname)):
-            if (len(charname) <= 12):
-                # Get the right section ID in the table and print it
-                print(PSO_SECTIONID[unicode_sum(charname, PSO_LEGACY_CLASSVAL)])
-                break
-            else:
-                print("\n" + LEN_REMINDER + "\n")
-        else:
-            print("\n" + NOTASCII + "\n")
-
-elif ((modechar == 'b') or (modechar == "B")): # Blue Burst calculation mode
-    print(BB_DESC)
-    while (1):
-        charname = input(str(TYPE_IN_NAME))
-        if (len(charname) <= 10):
-        
-            print("")
-            print("HUmar       " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[0])])
-            print("HUnewearl   " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[1])])
-            print("HUcast      " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[2])])
-            print("HUcaseal    " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[3])])
-            print("")
-            print("RAmar       " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[4])])
-            print("RAmarl      " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[5])])
-            print("RAcast      " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[6])])
-            print("RAcaseal    " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[7])])
-            print("")
-            print("FOmar       " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[8])])
-            print("FOmarl      " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[9])])
-            print("FOnewm      " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[10])])
-            print("FOnewearl   " + PSO_SECTIONID[unicode_sum(charname, PSOBB_CLASSESVAL[11])])
-            break
-        else:
-            print("\n" + BB_LEN_REMINDER + "\n")
+	print("  RAmar     = " + BB_SectionID(name, BB_CLASSVAL[4]))
+	print("  RAmarl    = " + BB_SectionID(name, BB_CLASSVAL[5]))
+	print("  RAcast    = " + BB_SectionID(name, BB_CLASSVAL[6]))
+	print("  RAcaseal  = " + BB_SectionID(name, BB_CLASSVAL[7]))
+			
+	print("  FOmar     = " + BB_SectionID(name, BB_CLASSVAL[8]))
+	print("  FOmarl    = " + BB_SectionID(name, BB_CLASSVAL[9]))
+	print("  FOnewm    = " + BB_SectionID(name, BB_CLASSVAL[10]))
+	print("  FOnewearl = " + BB_SectionID(name, BB_CLASSVAL[11]))
+	return 0
+	
+argNum = len(sys.argv)
+arg = sys.argv
+	
+if (argNum == 2) and not ((arg[1] != '-l') or (arg[1] != '--loop')):
+	if (arg[1] != '-h') and (arg[1] != '--help'):
+		if (len(arg[1]) >= 1) and (len(arg[1]) <= 12):
+			# PSO 'Classic' only accepts up to 12 characters which must be ASCII
+			if len(arg[1]) == len(arg[1].encode()):
+				print("Classic:")
+				print("  " + SectionID(arg[1]) + "")
+			
+			else: print("Classic: (!) Invalid character(s) detected\n")
+		else: print("Classic: (!) 12-characters limit exceeded\n")
+		# PSO-BB only accepts 10-character names
+		if (len(arg[1]) <= 10):
+			# We compute Section ID for every class in the game
+			print("\nBlueBurst:")
+			BB_PrntSecIDList(nameBuf)
+			
+		else: print("\nBlueBurst: (!) 10-characters limit exceeded\n")
+		
+	else: print(USAGE)
+elif (argNum == 3):
+	if ((arg[1] == '-fc') or (arg[1] == '--force-classic')):
+		if (len(arg[2]) >= 1) and (len(arg[2]) <= 12):
+			if len(arg[2]) == len(arg[2].encode()):
+				print(SectionID(arg[2]))
+			
+			else: print("Classic: (!) Invalid character(s) detected\n")
+		else: print("Classic: (!) 12-characters limit exceeded\n")
+		
+	elif ((arg[1] == '-fb') or (arg[1] == '--force-bb')):
+		if (len(arg[2]) >= 1) and (len(arg[2]) <= 10):
+			BB_PrntSecIDList(arg[2])
+			
+		else: print("\n'" + arg[2] + "' (!) 10-characters limit exceeded\n")
+		
+	else: print(USAGE)
+	
+elif (argNum == 2) and ((arg[1] == '-l') or (arg[1] == '--loop')):
+	while True:
+		nameBuf = input("Name :\n  ")
+		
+		if (nameBuf == 'exit') or (nameBuf == 'Exit'):
+			break
+			
+		if (len(nameBuf) >= 1) and (len(nameBuf) <= 12):
+			if len(nameBuf) == len(nameBuf.encode()):
+				print("\nClassic:")
+				print("  " + SectionID(nameBuf))
+				
+			else: print("\nClassic: (!) Invalid character(s) detected\n")
+		else: print("\n(!) 12-characters limit exceeded\n")
+			
+		if (len(nameBuf) >= 1) and (len(nameBuf) <= 10):
+			print("\nBlueBurst:")
+			BB_PrntSecIDList(nameBuf)
+			print("")
+			
+		else: print("\nBlueBurst: (!) 10-characters limit exceeded\n")	
+		
+else: print(USAGE)
