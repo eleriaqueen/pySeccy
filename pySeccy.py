@@ -1,7 +1,7 @@
 import sys
 
 USAGE = "usage: pySeccy name\n\
-       pySeccy [-h] [-f NAME] [-F NAME] [-l]\n\n\
+       pySeccy [-h] [-fc NAME] [-fb NAME] [-l]\n\n\
 optional arguments:\n\
   -h, --help            show this help message and exit\n\
   -fc, --force-classic NAME  compute Section ID\n\
