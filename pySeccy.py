@@ -11,6 +11,24 @@ optional arguments:\n\
   -l, --loop            enter multiple names one after the other\n\
                         type-in the word 'exit' to leave\n"
 
+def isTenCharLong(string):
+	if (len(string) >= 1) and (len(string) <= 10):
+		return True
+	else:
+		return False
+		
+def isTwelveCharLong(string):
+	if (len(string) >= 1) and (len(string) <= 12):
+		return True
+	else:
+		return False		
+						
+def isAscii(string):
+	if len(string) != len(string.encode()):
+		return False
+	else:
+		return True
+						
 def SectionID(name):
 	idList = ["Viridia", "Greenill", "Skyly", "Bluefull", "Purplenum", "Pinkal", "Redria", "Oran", "Yellowboze", "Whitill"]
 	classicVal = 5
@@ -53,6 +71,7 @@ def SpecialCases(string):
 	
 def BB_PrntSecIDList(name):
 	BB_CLASSVAL = [0, 1, 2, 9, 3, 11, 4, 5, 10, 6, 7, 8]
+	
 	print("  HUmar     = " + BB_SectionID(name, BB_CLASSVAL[0]))
 	print("  HUcast    = " + BB_SectionID(name, BB_CLASSVAL[1]))
 	print("  HUcaseal  = " + BB_SectionID(name, BB_CLASSVAL[2]))
@@ -69,56 +88,66 @@ def BB_PrntSecIDList(name):
 	print("  FOnewearl = " + BB_SectionID(name, BB_CLASSVAL[11]))
 	return 0
 
-def basicMode(arg1):
+def basicMode(arg):
+	argLen = len(arg)
+	
 	# PSO 'Classic' only accepts up to 12 characters which must be ASCII
-	if (len(arg1) >= 1) and (len(arg1) <= 12) and (len(arg1) == len(arg1.encode())):
+	if isTwelveCharLong(arg) and \
+	isAscii(arg):
 		print("Classic:")
-		print("  " + SectionID(arg1) + "")
+		print("  " + SectionID(arg) + "")
 		
-	elif (len(arg1) != len(arg1.encode())):
+	elif not isAscii(arg):
 		print("Classic: (!) Invalid character(s) detected\n")
 		
 	else: print("Classic: (!) 12-characters limit exceeded\n")
 	
 	# PSO-BB only accepts 10-character names
-	if (len(arg1) <= 10):
+	if isTenCharLong(arg):
 		# We compute Section ID for every class in the game
 		print("\nBlueBurst:")
-		BB_PrntSecIDList(arg1)
+		BB_PrntSecIDList(arg)
 		
 	else: print("\nBlueBurst: (!) 10-characters limit exceeded\n")
 	
-def classicMode(arg2):
-	if (len(arg2) >= 1) and (len(arg2) <= 12) and (len(arg2) == len(arg2.encode())):
-		print(SectionID(arg2))
+def classicMode(arg):
+	argLen = len(arg)
+	
+	if isTwelveCharLong(arg) and \
+	isAscii(arg):
+		print(SectionID(arg))
 			
-	elif len(arg2) != len(arg2.encode()): 
+	elif not isAscii(arg): 
 		print("Classic: (!) Invalid character(s) detected\n")
 			
 	else: print("Classic: (!) 12-characters limit exceeded\n")
 	
-def bbMode(arg2):
-	if (len(arg2) >= 1) and (len(arg2) <= 10):
-		BB_PrntSecIDList(arg2)
+def bbMode(arg):
+	argLen = len(arg)
+	if isTenCharLong(arg):
+		BB_PrntSecIDList(arg)
 			
-	else: print("\n'" + arg2 + "' (!) 10-characters limit exceeded\n")
+	else: print("\n'" + arg + "' (!) 10-characters limit exceeded\n")
 	
 def loopMode():
 	buf = input("Name :\n  ")
+	bufLen = len(buf)
 		
-	if (buf == 'exit') or (buf == 'Exit'):
+	if (buf == 'exit') or \
+	(buf == 'Exit'):
 		sys.exit()
 		
-	if (len(buf) >= 1) and (len(buf) <= 12) and (len(buf) == len(buf.encode())):
+	if isTwelveCharLong(buf) and \
+	isAscii(buf):
 		print("\nClassic:")
 		print("  " + SectionID(buf))
 			
-	elif (len(buf) != len(buf.encode())):
+	elif not isAscii(buf):
 		print("\nClassic: (!) Invalid character(s) detected\n")
 		
 	else: print("\n(!) 12-characters limit exceeded\n")
 		
-	if (len(buf) >= 1) and (len(buf) <= 10):
+	if isTenCharLong(buf):
 		print("\nBlueBurst:")
 		BB_PrntSecIDList(buf)
 		print("")
@@ -128,22 +157,28 @@ def loopMode():
 argNum = len(sys.argv)
 arg = sys.argv
 	
-if (argNum == 2) and not ((arg[1] == '-l') or (arg[1] == '--loop')):
+if (argNum == 2) and \
+not ((arg[1] == '-l') or (arg[1] == '--loop') or \
+(arg[1] == '-fc') or (arg[1] == '--force-classic') or \
+(arg[1] == '-fb') or (arg[1] == '--force-bb')):
 	if (arg[1] != '-h') and (arg[1] != '--help'):
 		basicMode(arg[1])
 		
 	else: print(USAGE)
 	
 elif (argNum == 3):
-	if ((arg[1] == '-fc') or (arg[1] == '--force-classic')):
+	if ((arg[1] == '-fc') or \
+	(arg[1] == '--force-classic')):
 		classicMode(arg[2])
 		
-	elif ((arg[1] == '-fb') or (arg[1] == '--force-bb')):
+	elif ((arg[1] == '-fb') or \
+	(arg[1] == '--force-bb')):
 		bbMode(arg[2])
 		
 	else: print(USAGE)
 	
-elif (argNum == 2) and ((arg[1] == '-l') or (arg[1] == '--loop')):
+elif (argNum == 2) and \
+((arg[1] == '-l') or (arg[1] == '--loop')):
 	while True:
 		loopMode()
 		
