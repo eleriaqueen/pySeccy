@@ -105,7 +105,7 @@ def loopMode():
 	buf = input("Name :\n  ")
 		
 	if (buf == 'exit') or (buf == 'Exit'):
-		return
+		sys.exit()
 		
 	if (len(buf) >= 1) and (len(buf) <= 12) and (len(buf) == len(buf.encode())):
 		print("\nClassic:")
