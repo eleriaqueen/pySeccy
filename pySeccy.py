@@ -12,22 +12,28 @@ optional arguments:\n\
                         type-in the word 'exit' to leave\n"
 
 def SectionID(name):
-	idList = ['Pinkal', 'Redria', 'Oran', 'Yellowboze', 'Whitill', 'Viridia', 'Greenill', 'Skyly', 'Bluefull', 'Purplenum']
+	idList = ["Viridia", "Greenill", "Skyly", "Bluefull", "Purplenum", "Pinkal", "Redria", "Oran", "Yellowboze", "Whitill"]
 	classicVal = 5
 	total = 0
 	
-	for i in name:
-		total += ord(i)
-		
-	return(idList[(total + classicVal) % 10] )
+	total += SpecialCases(name)
+				
+	return(idList[(total + classicVal) % 10])
 	
 def BB_SectionID(name, BBVal):
 	idList = ["Viridia", "Greenill", "Skyly", "Bluefull", "Purplenum", "Pinkal", "Redria", "Oran", "Yellowboze", "Whitill"]
 	total = 0
 	flag = 0
 	
-	for i in name:
-		total += ord(i)
+	total += SpecialCases(name)
+				
+	return(idList[(total + BBVal) % 10])
+
+def SpecialCases(string):
+	temp = 0
+	flag = 0
+	for i in string:
+		temp += ord(i)
 		cur = ord(i)
 		
 		if (cur > 256) and (cur < 65377):
@@ -35,19 +41,15 @@ def BB_SectionID(name, BBVal):
 			if (flag != 2):
 
 				flag = 2
-				total += 83
+				temp += 83
 				
 		elif (cur < 0xFF91):
 
 			if (flag != 1):
 
 				flag = 1
-				total += 0x2D
-				
-	return(idList[(total + BBVal) % 10] )
-
-def PrntSecID(name):
-	print(SectionID(name), lega)
+				temp += 0x2D
+	return temp
 	
 def BB_PrntSecIDList(name):
 	BB_CLASSVAL = [0, 1, 2, 9, 3, 11, 4, 5, 10, 6, 7, 8]
