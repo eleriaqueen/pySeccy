@@ -156,19 +156,27 @@ def loopMode():
 	
 argNum = len(sys.argv)
 arg = sys.argv
+
+if (argNum == 2):
+	LOOP          = True if ((arg[1] == '-l' ) or  (arg[1] == '--loop'         )) else False
+	HELP          = True if ((arg[1] != '-h' ) or  (arg[1] != '--help'         )) else False
 	
-LOOP			= True if ((arg[1] == '-l')		or	(arg[1] == '--loop'))			else False
-FORCE_CLASSIC	= True if ((arg[1] == '-fc')	or	(arg[1] == '--force-classic'))	else False
-FORCE_BB		= True if ((arg[1] == '-fb')	or	(arg[1] == '--force-bb')		else False
-HELP			= True if ((arg[1] != '-h')		and	(arg[1] != '--help'))			else False
-	
-if (argNum == 2) and not (LOOP or FORCE_CLASSIC or FORCE_BB):
-	if HELP:
-		basicMode(arg[1])
+	if not (LOOP or FORCE_CLASSIC or FORCE_BB):
+		if HELP:
+			basicMode(arg[1])
 		
-	else: print(USAGE)
+		else: print(USAGE)
 	
+	elif LOOP:
+		while True:
+			loopMode()
+			
+	else: print(USAGE)	
+
 elif (argNum == 3):
+	FORCE_CLASSIC = True if ((arg[1] == '-fc') or  (arg[1] == '--force-classic')) else False
+	FORCE_BB      = True if ((arg[1] == '-fb') or  (arg[1] == '--force-bb'     )) else False
+	
 	if FORCE_CLASSIC:
 		classicMode(arg[2])
 		
@@ -176,9 +184,5 @@ elif (argNum == 3):
 		bbMode(arg[2])
 		
 	else: print(USAGE)
-	
-elif (argNum == 2) and LOOP:
-	while True:
-		loopMode()
 		
 else: print(USAGE)
