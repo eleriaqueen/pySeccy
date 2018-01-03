@@ -86,7 +86,6 @@ def BB_PrntSecIDList(name):
 	print("  FOmarl    = " + BB_SectionID(name, BB_CLASSVAL[9]))
 	print("  FOnewm    = " + BB_SectionID(name, BB_CLASSVAL[10]))
 	print("  FOnewearl = " + BB_SectionID(name, BB_CLASSVAL[11]))
-	return 0
 
 def basicMode(arg):
 	argLen = len(arg)
@@ -160,6 +159,9 @@ arg = sys.argv
 if (argNum == 2):
 	LOOP = True if ((arg[1] == '-l') or (arg[1] == '--loop')) else False
 	HELP = True if ((arg[1] != '-h') or (arg[1] != '--help')) else False
+	
+	FORCE_CLASSIC = True if ((arg[1] == '-fc') or (arg[1] == '--force-classic')) else False
+	FORCE_BB      = True if ((arg[1] == '-fb') or (arg[1] == '--force-bb'     )) else False
 	
 	if not (LOOP or FORCE_CLASSIC or FORCE_BB):
 		if HELP:
