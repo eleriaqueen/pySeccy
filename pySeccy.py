@@ -73,9 +73,9 @@ def BB_PrntSecIDList(name):
 	BB_CLASSVAL = [0, 1, 2, 9, 3, 11, 4, 5, 10, 6, 7, 8]
 	
 	print("  HUmar     = " + BB_SectionID(name, BB_CLASSVAL[0]))
-	print("  HUcast    = " + BB_SectionID(name, BB_CLASSVAL[1]))
-	print("  HUcaseal  = " + BB_SectionID(name, BB_CLASSVAL[2]))
-	print("  HUnewearl = " + BB_SectionID(name, BB_CLASSVAL[3]))
+	print("  HUnewearl = " + BB_SectionID(name, BB_CLASSVAL[1]))
+	print("  HUcast    = " + BB_SectionID(name, BB_CLASSVAL[2]))
+	print("  HUcaseal  = " + BB_SectionID(name, BB_CLASSVAL[3]))
 			
 	print("  RAmar     = " + BB_SectionID(name, BB_CLASSVAL[4]))
 	print("  RAmarl    = " + BB_SectionID(name, BB_CLASSVAL[5]))
