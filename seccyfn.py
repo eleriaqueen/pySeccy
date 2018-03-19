@@ -1,3 +1,7 @@
+BB_CLASSVAL = [0, 1, 2, 9, 3, 11, 4, 5, 10, 6, 7, 8]
+
+idList = ["Viridia", "Greenill", "Skyly", "Bluefull", "Purplenum", "Pinkal", "Redria", "Oran", "Yellowboze", "Whitill"]
+
 def isTenCharLong(string):
 	if (len(string) >= 1) and (len(string) <= 10):
 		return True
@@ -17,7 +21,6 @@ def isAscii(string):
 		return True
 						
 def SectionID(name):
-	idList = ["Viridia", "Greenill", "Skyly", "Bluefull", "Purplenum", "Pinkal", "Redria", "Oran", "Yellowboze", "Whitill"]
 	classicVal = 5
 	total = 0
 	
@@ -26,7 +29,6 @@ def SectionID(name):
 	return(idList[(total + classicVal) % 10])
 	
 def BB_SectionID(name, BBVal):
-	idList = ["Viridia", "Greenill", "Skyly", "Bluefull", "Purplenum", "Pinkal", "Redria", "Oran", "Yellowboze", "Whitill"]
 	total = 0
 	flag = 0
 	
@@ -57,8 +59,6 @@ def SpecialCases(string):
 	return temp
 	
 def BB_PrntSecIDList(name):
-	BB_CLASSVAL = [0, 1, 2, 9, 3, 11, 4, 5, 10, 6, 7, 8]
-	
 	print("  HUmar     = " + BB_SectionID(name, BB_CLASSVAL[0]))
 	print("  HUnewearl = " + BB_SectionID(name, BB_CLASSVAL[1]))
 	print("  HUcast    = " + BB_SectionID(name, BB_CLASSVAL[2]))
@@ -121,7 +121,7 @@ def loopMode():
 		
 	if (buf == 'exit') or \
 	(buf == 'Exit'):
-		sys.exit()
+		exit()
 		
 	if isTwelveCharLong(buf) and \
 	isAscii(buf):
