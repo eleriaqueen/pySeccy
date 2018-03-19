@@ -4,7 +4,7 @@ This script runs best on Python 3.6
 
 ```
 usage: pySeccy name
-       pySeccy [-h] [-f NAME] [-F NAME] [-l]
+       pySeccy [-h] [-fc NAME] [-fb NAME] [-l]
 
 optional arguments:
   -h, --help            show this help message and exit
