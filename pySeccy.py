@@ -20,13 +20,13 @@ arg = sys.argv
 
 if (argNum == 2):
 	LOOP = True if ((arg[1] == '-l') or (arg[1] == '--loop')) else False
-	HELP = True if ((arg[1] != '-h') or (arg[1] != '--help')) else False
+	HELP = True if ((arg[1] == '-h') or (arg[1] == '--help')) else False
 	
 	FORCE_CLASSIC = True if ((arg[1] == '-fc') or (arg[1] == '--force-classic')) else False
 	FORCE_BB      = True if ((arg[1] == '-fb') or (arg[1] == '--force-bb'     )) else False
 	
 	if not (LOOP or FORCE_CLASSIC or FORCE_BB):
-		if HELP:
+		if not HELP:
 			basicMode(arg[1])
 		
 		else: print(USAGE)
