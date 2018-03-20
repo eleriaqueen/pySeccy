@@ -8,10 +8,13 @@ usage: pySeccy name
 
 optional arguments:
   -h, --help            show this help message and exit
-  -fc, --force-classic NAME  compute Section ID
+  
+  -fc, --force-classic  compute Section ID
                         for PSO V1\V2\PC\GC only
-  -fb, --force-bb NAME  compute Section ID
+                        
+  -fb, --force-bb       compute Section ID
                         for PSO Blue Burst only
+                        
   -l, --loop            enter multiple names one after the other
                         type-in the word 'exit' to leave
 ```
