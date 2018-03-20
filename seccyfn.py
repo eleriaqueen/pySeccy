@@ -1,19 +1,13 @@
 BB_CLASSVAL = [0, 1, 2, 9, 3, 11, 4, 5, 10, 6, 7, 8]
 
 idList = ["Viridia", "Greenill", "Skyly", "Bluefull", "Purplenum", "Pinkal", "Redria", "Oran", "Yellowboze", "Whitill"]
-
-def isTenCharLong(string):
-	if (len(string) >= 1) and (len(string) <= 10):
-		return True
-	else:
-		return False
 		
-def isTwelveCharLong(string):
-	if (len(string) >= 1) and (len(string) <= 12):
+def lenEquals(string, length):
+	if (length >= 1) and (len(string) >= 1) and (len(string) <= length):
 		return True
 	else:
-		return False		
-						
+		return False	
+			
 def isAscii(string):
 	if len(string) != len(string.encode()):
 		return False
@@ -78,7 +72,7 @@ def basicMode(arg):
 	argLen = len(arg)
 	
 	# PSO 'Classic' only accepts up to 12 characters which must be ASCII
-	if isTwelveCharLong(arg) and \
+	if lenEquals(arg, 12) and \
 	isAscii(arg):
 		print("Classic:")
 		print("  " + SectionID(arg) + "")
@@ -89,7 +83,7 @@ def basicMode(arg):
 	else: print("Classic: (!) 12-characters limit exceeded\n")
 	
 	# PSO-BB only accepts 10-character names
-	if isTenCharLong(arg):
+	if lenEquals(arg, 10):
 		# We compute Section ID for every class in the game
 		print("\nBlueBurst:")
 		BB_PrntSecIDList(arg)
@@ -99,7 +93,7 @@ def basicMode(arg):
 def classicMode(arg):
 	argLen = len(arg)
 	
-	if isTwelveCharLong(arg) and \
+	if lenEquals(arg, 12) and \
 	isAscii(arg):
 		print(SectionID(arg))
 			
@@ -110,10 +104,10 @@ def classicMode(arg):
 	
 def bbMode(arg):
 	argLen = len(arg)
-	if isTenCharLong(arg):
+	if lenEquals(arg, 10):
 		BB_PrntSecIDList(arg)
 			
-	else: print("\n'" + arg + "' (!) 10-characters limit exceeded\n")
+	else: print("BlueBurst: (!) 10-characters limit exceeded\n")
 	
 def loopMode():
 	buf = input("Name :\n  ")
@@ -123,7 +117,7 @@ def loopMode():
 	(buf == 'Exit'):
 		exit()
 		
-	if isTwelveCharLong(buf) and \
+	if lenEquals(buf, 12) and \
 	isAscii(buf):
 		print("\nClassic:")
 		print("  " + SectionID(buf))
@@ -133,7 +127,7 @@ def loopMode():
 		
 	else: print("\n(!) 12-characters limit exceeded\n")
 		
-	if isTenCharLong(buf):
+	if lenEquals(buf, 10):
 		print("\nBlueBurst:")
 		BB_PrntSecIDList(buf)
 		print("")
