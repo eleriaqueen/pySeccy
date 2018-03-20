@@ -7,11 +7,11 @@ from seccyfn import *
 USAGE = "usage: pySeccy name\n\
        pySeccy [-h] [-fc NAME] [-fb NAME] [-l]\n\n\
 optional arguments:\n\
-  -h, --help            show this help message and exit\n\
-  -fc, --force-classic NAME  compute Section ID\n\
-                        for PSO V1\\V2\\PC\\GC only\n\
-  -fb, --force-bb NAME  compute Section ID\n\
-                        for PSO Blue Burst only\n\
+  -h, --help            show this help message and exit\n\n\
+  -fc, --force-classic  compute Section ID\n\
+                        for PSO V1\\V2\\PC\\GC only\n\n\
+  -fb, --force-bb       compute Section ID\n\
+                        for PSO Blue Burst only\n\n\
   -l, --loop            enter multiple names one after the other\n\
                         type-in the word 'exit' to leave\n"
 	
@@ -25,17 +25,15 @@ if (argNum == 2):
 	FORCE_CLASSIC = True if ((arg[1] == '-fc') or (arg[1] == '--force-classic')) else False
 	FORCE_BB      = True if ((arg[1] == '-fb') or (arg[1] == '--force-bb'     )) else False
 	
-	if not (LOOP or FORCE_CLASSIC or FORCE_BB):
-		if not HELP:
-			basicMode(arg[1])
-		
-		else: print(USAGE)
-	
-	elif LOOP:
+	if LOOP:
 		while True:
 			loopMode()
-			
-	else: print(USAGE)	
+		exit()
+		
+	elif not (HELP or FORCE_CLASSIC or FORCE_BB):
+		basicMode(arg[1])
+		
+	else: print(USAGE)
 
 elif (argNum == 3):
 	FORCE_CLASSIC = True if ((arg[1] == '-fc') or (arg[1] == '--force-classic')) else False
