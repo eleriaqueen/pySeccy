@@ -19,4 +19,4 @@ optional arguments:
                         type-in the word 'exit' to leave
 ```
 
-![alt text](https://media.giphy.com/media/3oFzlY4FNruglpzJLi/giphy.gif)
+[![asciicast](https://asciinema.org/a/FILgELY60xuJYCIyre9eibba6.png)](https://asciinema.org/a/FILgELY60xuJYCIyre9eibba6)
