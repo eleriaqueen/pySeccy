@@ -15,7 +15,7 @@ optional arguments:
   -fb, --force-bb       compute Section ID
                         for PSO Blue Burst only
                         
-  -l, --loop            enter multiple names one after the other
+  -l, --loop            enter one name after the other
                         type-in the word 'exit' to leave
 ```
 

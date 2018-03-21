@@ -12,7 +12,7 @@ optional arguments:\n\
                         for PSO V1\\V2\\PC\\GC only\n\n\
   -fb, --force-bb       compute Section ID\n\
                         for PSO Blue Burst only\n\n\
-  -l, --loop            enter multiple names one after the other\n\
+  -l, --loop            enter one name after the other\n\
                         type-in the word 'exit' to leave\n"
 	
 argNum = len(sys.argv)
