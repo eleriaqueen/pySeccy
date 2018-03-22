@@ -113,8 +113,9 @@ def loopMode():
 	buf = input("Name :\n  ")
 	bufLen = len(buf)
 		
-	if (buf == 'exit') or \
-	(buf == 'Exit'):
+	if (buf == 'quit') or \
+	(buf == 'Quit'):
+		print("Leaving loop mode, see you on Ragol!")
 		exit()
 		
 	if lenEquals(buf, 12) and \

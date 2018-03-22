@@ -13,7 +13,7 @@ optional arguments:\n\
   -fb, --force-bb       compute Section ID\n\
                         for PSO Blue Burst only\n\n\
   -l, --loop            enter one name after the other\n\
-                        type-in the word 'exit' to leave\n"
+                        type-in the word 'quit' to leave\n"
 	
 argNum = len(sys.argv)
 arg = sys.argv
