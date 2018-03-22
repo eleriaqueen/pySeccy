@@ -16,7 +16,7 @@ optional arguments:
                         for PSO Blue Burst only
                         
   -l, --loop            enter one name after the other
-                        type-in the word 'exit' to leave
+                        type-in the word 'quit' to leave
 ```
 
 [![asciicast](https://asciinema.org/a/a1I6oc1WiopXzTlo2xsus5DVT.png)](https://asciinema.org/a/a1I6oc1WiopXzTlo2xsus5DVT)
