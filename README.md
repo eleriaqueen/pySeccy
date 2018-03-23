@@ -19,4 +19,4 @@ optional arguments:
                         type-in the word 'quit' to leave
 ```
 
-[![asciicast](https://asciinema.org/a/a1I6oc1WiopXzTlo2xsus5DVT.png)](https://asciinema.org/a/a1I6oc1WiopXzTlo2xsus5DVT)
+[![asciicast](https://asciinema.org/a/EG87iFJHULOsgdQjWSuO6CeMe.png)](https://asciinema.org/a/EG87iFJHULOsgdQjWSuO6CeMe)
