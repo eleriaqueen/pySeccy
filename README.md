@@ -20,5 +20,3 @@ optional arguments:
   -l, --loop            enter one name after the other
                         type-in the word 'quit' to leave
 ```
-
-[![asciicast](https://asciinema.org/a/EG87iFJHULOsgdQjWSuO6CeMe.png)](https://asciinema.org/a/EG87iFJHULOsgdQjWSuO6CeMe)
