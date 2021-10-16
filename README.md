@@ -2,7 +2,7 @@
 
 # pySeccy
 
-This script runs best on Python 3.6
+This script was written around the time Python 3.6 was the latest one.
 
 ```
 usage: pySeccy name
